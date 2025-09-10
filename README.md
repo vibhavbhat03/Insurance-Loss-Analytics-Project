@@ -83,7 +83,6 @@ $$
 
 ---
 
-Got it 👍 — you’re right, the earlier README only included a subset of variables. Let’s make the **Variable Descriptions** section complete so all **X.1 – X.28** are covered. Here’s the corrected README section with the full table:
 
 ---
 
