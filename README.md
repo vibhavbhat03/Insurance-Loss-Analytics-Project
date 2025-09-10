@@ -83,30 +83,49 @@ $$
 
 ---
 
-## 📊 Variable Descriptions (Selected)
+Got it 👍 — you’re right, the earlier README only included a subset of variables. Let’s make the **Variable Descriptions** section complete so all **X.1 – X.28** are covered. Here’s the corrected README section with the full table:
 
-| Variable | Description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| X.1      | Internal policy ID                                                          |
-| X.2      | Policy start date                                                           |
-| X.5      | Insured’s date of birth                                                     |
-| X.7      | Contract channel (0 = Agent, 1 = Broker)                                    |
-| X.8      | Years with insurance entity                                                 |
-| X.12     | Number of policies canceled for nonpayment (current year)                   |
-| X.14     | Net premium amount (current year)                                           |
-| X.15     | Total cost of claims (current year)                                         |
-| X.16     | Total number of claims (current year)                                       |
-| X.17     | Total claims filed historically                                             |
-| X.18     | Claims-to-duration ratio                                                    |
-| X.19     | Vehicle risk type (1: Motorbike, 2: Van, 3: Passenger Car, 4: Agricultural) |
-| X.20     | Region type (0 = Rural, 1 = Urban)                                          |
-| X.22     | Vehicle registration year                                                   |
-| X.23     | Vehicle power (horsepower)                                                  |
-| X.25     | Market value of vehicle (as of 12/31/2019)                                  |
-| X.27     | Energy source (P = Petrol, D = Diesel)                                      |
-| X.28     | Vehicle weight (kg)                                                         |
+---
 
-(See full project document for all variable details.)
+## 📊 Variable Descriptions
+
+| Variable | Description                                                                              |
+| -------- | ---------------------------------------------------------------------------------------- |
+| **X.1**  | Internal identification number assigned to each annual contract formalized by an insured |
+| **X.2**  | Start date of the policyholder’s contract (DD/MM/YYYY)                                   |
+| **X.3**  | Date of last contract renewal (DD/MM/YYYY)                                               |
+| **X.4**  | Date of the next contract renewal (DD/MM/YYYY)                                           |
+| **X.5**  | Date of birth of the insured declared in the policy (DD/MM/YYYY)                         |
+| **X.6**  | Date of issuance of the insured person’s driver’s license (DD/MM/YYYY)                   |
+| **X.7**  | Channel through which the policy was contracted (0: Agent, 1: Insurance broker)          |
+| **X.8**  | Total number of years the insured has been associated with the insurance entity          |
+| **X.9**  | Total number of policies held by the insured in the insurance entity                     |
+| **X.10** | Maximum number of policies that the insured has ever had in force                        |
+| **X.11** | Maximum number of products that the insured has simultaneously held at any given point   |
+| **X.12** | Number of policies canceled or terminated for nonpayment in the current year             |
+| **X.13** | Last payment method of the reference policy (1: half-yearly, 0: annual)                  |
+| **X.14** | Net premium amount associated with the policy during the current year                    |
+| **X.15** | Total cost of claims for the insurance policy during the current year                    |
+| **X.16** | Total number of claims incurred for the insurance policy during the current year         |
+| **X.17** | Total number of claims filed throughout the entire duration of the policy                |
+| **X.18** | Ratio of number of claims filed to total duration (years) of the policy in force         |
+| **X.19** | Type of risk (1: Motorbikes, 2: Vans, 3: Passenger cars, 4: Agricultural vehicles)       |
+| **X.20** | 0 for rural, 1 for urban (more than 30,000 inhabitants)                                  |
+| **X.21** | 1 if multiple regular drivers are declared, 0 if only one driver is declared             |
+| **X.22** | Year of vehicle registration (YYYY)                                                      |
+| **X.23** | Vehicle power measured in horsepower                                                     |
+| **X.24** | Cylinder capacity of the vehicle                                                         |
+| **X.25** | Market value of the vehicle as of 31/12/2019                                             |
+| **X.26** | Number of vehicle doors                                                                  |
+| **X.27** | Energy source used to power the vehicle (P = Petrol, D = Diesel)                         |
+| **X.28** | Vehicle weight in kilograms                                                              |
+
+---
+
+This way your GitHub README fully documents the dataset variables, without leaving anything out.
+
+👉 Do you want me to **insert this full version into the README draft** I gave earlier, so you have the polished file ready to upload?
+
 
 ---
 
