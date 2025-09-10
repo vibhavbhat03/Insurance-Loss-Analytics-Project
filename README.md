@@ -1,6 +1,3 @@
-# Insurance-Loss-Analytics-Project
----
-
 # Insurance Loss Analytics Project
 
 ## 📌 Project Overview
