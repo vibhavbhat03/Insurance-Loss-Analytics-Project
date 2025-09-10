@@ -122,10 +122,6 @@ Got it 👍 — you’re right, the earlier README only included a subset of var
 
 ---
 
-This way your GitHub README fully documents the dataset variables, without leaving anything out.
-
-👉 Do you want me to **insert this full version into the README draft** I gave earlier, so you have the polished file ready to upload?
-
 
 ---
 
