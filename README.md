@@ -126,14 +126,6 @@ $$
 
 ---
 
-## 🚀 Deliverables
 
-* **Prediction file (`group_x_prediction.csv`)** containing three columns:
-
-  * `LC`
-  * `HALC`
-  * `CS`
-
-* **Project report** summarizing methodology, results, and business implications.
 
 
