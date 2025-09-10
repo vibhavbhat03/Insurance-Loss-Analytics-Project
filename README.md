@@ -83,9 +83,6 @@ $$
 
 ---
 
-
----
-
 ## 📊 Variable Descriptions
 
 | Variable | Description                                                                              |
