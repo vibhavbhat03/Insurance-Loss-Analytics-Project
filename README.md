@@ -1,6 +1,4 @@
 # Insurance-Loss-Analytics-Project
-Here’s a clean, well-structured **README.md** draft for your GitHub repo based on the project details. It includes problem context, formulas, tasks, dataset descriptions, and variable definitions, without unnecessary class admin details.
-
 ---
 
 # Insurance Loss Analytics Project
