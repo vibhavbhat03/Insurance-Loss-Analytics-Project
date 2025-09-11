@@ -169,18 +169,4 @@ We experimented with multiple strategies:
 
 ---
 
-## 🚀 Deliverables
 
-* **Prediction file (`group_x_prediction.csv`)** containing three columns:
-
-  * `LC`
-  * `HALC`
-  * `CS`
-
-* **Project report** summarizing methodology, results, and business implications.
-
----
-
-✅ This README now combines both the **project brief** and your **implemented methodology/results**.
-
-Do you want me to also include a **“Future Work”** section from your report (e.g., autoencoder augmentation, limitations, business insights), or should I keep it focused on the main final approach?
