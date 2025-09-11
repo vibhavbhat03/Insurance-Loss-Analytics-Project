@@ -65,25 +65,38 @@ $$
 
 ---
 
-## 📊 Variable Descriptions (Selected)
+## 📊 Variable Descriptions 
 
-| Variable | Description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| X.1      | Internal policy ID                                                          |
-| X.7      | Contract channel (0 = Agent, 1 = Broker)                                    |
-| X.8      | Years with insurance entity                                                 |
-| X.12     | Number of policies canceled for nonpayment (current year)                   |
-| X.14     | Net premium amount (current year)                                           |
-| X.15     | Total cost of claims (current year)                                         |
-| X.16     | Total number of claims (current year)                                       |
-| X.18     | Claims-to-duration ratio                                                    |
-| X.19     | Vehicle risk type (1: Motorbike, 2: Van, 3: Passenger Car, 4: Agricultural) |
-| X.20     | Region type (0 = Rural, 1 = Urban)                                          |
-| X.22     | Vehicle registration year                                                   |
-| X.23     | Vehicle power (horsepower)                                                  |
-| X.25     | Market value of vehicle                                                     |
-| X.27     | Energy source (P = Petrol, D = Diesel)                                      |
-| X.28     | Vehicle weight (kg)                                                         |
+| Variable | Description                                                                               |
+| -------- | ----------------------------------------------------------------------------------------- |
+| **X.1**  | Internal identification number assigned to each annual contract formalized by an insured. |
+| **X.2**  | Start date of the policyholder’s contract *(DD/MM/YYYY)*.                                 |
+| **X.3**  | Date of last contract renewal *(DD/MM/YYYY)*.                                             |
+| **X.4**  | Date of the next contract renewal *(DD/MM/YYYY)*.                                         |
+| **X.5**  | Date of birth of the insured declared in the policy *(DD/MM/YYYY)*.                       |
+| **X.6**  | Date of issuance of the insured person’s driver’s license *(DD/MM/YYYY)*.                 |
+| **X.7**  | Channel through which the policy was contracted *(0 = Agent, 1 = Insurance broker)*.      |
+| **X.8**  | Total number of years the insured has been associated with the insurance entity.          |
+| **X.9**  | Total number of policies held by the insured in the insurance entity.                     |
+| **X.10** | Maximum number of policies that the insured has ever had in force.                        |
+| **X.11** | Maximum number of products that the insured has simultaneously held at any given point.   |
+| **X.12** | Number of policies canceled or terminated for nonpayment in the current year.             |
+| **X.13** | Last payment method of the reference policy *(1 = half-yearly, 0 = annual)*.              |
+| **X.14** | Net premium amount associated with the policy during the current year.                    |
+| **X.15** | Total cost of claims for the insurance policy during the current year.                    |
+| **X.16** | Total number of claims incurred for the insurance policy during the current year.         |
+| **X.17** | Total number of claims filed throughout the entire duration of the policy.                |
+| **X.18** | Ratio of number of claims filed to total duration (in years) of the policy in force.      |
+| **X.19** | Type of risk *(1 = Motorbikes, 2 = Vans, 3 = Passenger cars, 4 = Agricultural vehicles)*. |
+| **X.20** | Area type *(0 = Rural, 1 = Urban — more than 30,000 inhabitants)*.                        |
+| **X.21** | Driver information *(1 = Multiple regular drivers declared, 0 = Single driver declared)*. |
+| **X.22** | Year of vehicle registration *(YYYY)*.                                                    |
+| **X.23** | Vehicle power measured in horsepower.                                                     |
+| **X.24** | Cylinder capacity of the vehicle.                                                         |
+| **X.25** | Market value of the vehicle as of 31/12/2019.                                             |
+| **X.26** | Number of vehicle doors.                                                                  |
+| **X.27** | Energy source used to power the vehicle *(P = Petrol, D = Diesel)*.                       |
+| **X.28** | Vehicle weight in kilograms.                                                              |
 
 ---
 
