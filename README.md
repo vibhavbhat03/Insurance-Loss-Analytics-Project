@@ -33,24 +33,11 @@ $$
 LC = \frac{X.15}{X.16}
 $$
 
-Where:
-
-* `X.15` = Total cost of claims during the current year
-* `X.16` = Total number of claims during the current year
-
----
-
 2. **Historically Adjusted Loss Cost (HALC):**
 
 $$
 HALC = \frac{X.15}{X.16} \times X.18
 $$
-
-Where:
-
-* `X.18` = Ratio of claims filed to total duration (years) of policy in force
-
----
 
 3. **Claim Status (CS):**
 
@@ -78,58 +65,109 @@ $$
 
 ---
 
-## 📊 Variable Descriptions
+## 📊 Variable Descriptions (Selected)
 
-| Variable | Description                                                                              |
-| -------- | ---------------------------------------------------------------------------------------- |
-| **X.1**  | Internal identification number assigned to each annual contract formalized by an insured |
-| **X.2**  | Start date of the policyholder’s contract (DD/MM/YYYY)                                   |
-| **X.3**  | Date of last contract renewal (DD/MM/YYYY)                                               |
-| **X.4**  | Date of the next contract renewal (DD/MM/YYYY)                                           |
-| **X.5**  | Date of birth of the insured declared in the policy (DD/MM/YYYY)                         |
-| **X.6**  | Date of issuance of the insured person’s driver’s license (DD/MM/YYYY)                   |
-| **X.7**  | Channel through which the policy was contracted (0: Agent, 1: Insurance broker)          |
-| **X.8**  | Total number of years the insured has been associated with the insurance entity          |
-| **X.9**  | Total number of policies held by the insured in the insurance entity                     |
-| **X.10** | Maximum number of policies that the insured has ever had in force                        |
-| **X.11** | Maximum number of products that the insured has simultaneously held at any given point   |
-| **X.12** | Number of policies canceled or terminated for nonpayment in the current year             |
-| **X.13** | Last payment method of the reference policy (1: half-yearly, 0: annual)                  |
-| **X.14** | Net premium amount associated with the policy during the current year                    |
-| **X.15** | Total cost of claims for the insurance policy during the current year                    |
-| **X.16** | Total number of claims incurred for the insurance policy during the current year         |
-| **X.17** | Total number of claims filed throughout the entire duration of the policy                |
-| **X.18** | Ratio of number of claims filed to total duration (years) of the policy in force         |
-| **X.19** | Type of risk (1: Motorbikes, 2: Vans, 3: Passenger cars, 4: Agricultural vehicles)       |
-| **X.20** | 0 for rural, 1 for urban (more than 30,000 inhabitants)                                  |
-| **X.21** | 1 if multiple regular drivers are declared, 0 if only one driver is declared             |
-| **X.22** | Year of vehicle registration (YYYY)                                                      |
-| **X.23** | Vehicle power measured in horsepower                                                     |
-| **X.24** | Cylinder capacity of the vehicle                                                         |
-| **X.25** | Market value of the vehicle as of 31/12/2019                                             |
-| **X.26** | Number of vehicle doors                                                                  |
-| **X.27** | Energy source used to power the vehicle (P = Petrol, D = Diesel)                         |
-| **X.28** | Vehicle weight in kilograms                                                              |
+| Variable | Description                                                                 |
+| -------- | --------------------------------------------------------------------------- |
+| X.1      | Internal policy ID                                                          |
+| X.7      | Contract channel (0 = Agent, 1 = Broker)                                    |
+| X.8      | Years with insurance entity                                                 |
+| X.12     | Number of policies canceled for nonpayment (current year)                   |
+| X.14     | Net premium amount (current year)                                           |
+| X.15     | Total cost of claims (current year)                                         |
+| X.16     | Total number of claims (current year)                                       |
+| X.18     | Claims-to-duration ratio                                                    |
+| X.19     | Vehicle risk type (1: Motorbike, 2: Van, 3: Passenger Car, 4: Agricultural) |
+| X.20     | Region type (0 = Rural, 1 = Urban)                                          |
+| X.22     | Vehicle registration year                                                   |
+| X.23     | Vehicle power (horsepower)                                                  |
+| X.25     | Market value of vehicle                                                     |
+| X.27     | Energy source (P = Petrol, D = Diesel)                                      |
+| X.28     | Vehicle weight (kg)                                                         |
 
 ---
 
+## ⚙️ Methodology
 
-## ⚙️ Approaches Considered
+### 1. Data Stratification
 
-* **Generalized Linear Models (GLM)** with Tweedie distribution
-* **Tree-based models**: Random Forest, Gradient Boosting (XGBoost, LightGBM)
-* **Neural networks** for nonlinear relationships
-* **Model interpretation** using SHAP values
+To ensure representative training and validation splits, we created a composite **“Strata” column** by combining:
 
----
+* Claim Status (CS)
+* Percentile-binned LC
+* Percentile-binned HALC
 
-## 📈 Evaluation Metrics
-
-* **MSE** → For LC and HALC predictions
-* **ROC-AUC** → For claim status (CS) classification
+This stratification preserved the distribution of all targets across folds.
 
 ---
 
+### 2. Feature Engineering
 
+We engineered several new predictors:
 
+* `age_at_last_renewal` → Captures demographic risk
+* `driving_experience` → Years since license issuance
+* `vehicle_age` → Depreciation effects
+* `policy_tenure` → Customer loyalty
+* `claim_frequency_total` → Normalized historical claim frequency
 
+---
+
+### 3. Feature Selection
+
+We applied **Recursive Feature Elimination with Cross-Validation (RFECV)** to reduce dimensionality and select impactful variables. This reduced model complexity, improved interpretability, and maintained predictive power.
+
+---
+
+### 4. Modeling Approaches
+
+We experimented with multiple strategies:
+
+* **Individual Models (Baseline):** Separate models for CS (classification) and LC/HALC (regression).
+* **Two-Step Approach:** Predict CS first, then predict LC/HALC only for likely claimants.
+* **Three-Headed Neural Network:** Multi-task learning with a shared network and three outputs (CS, LC, HALC).
+* **Final Approach (Chosen):**
+
+  * Stage 1: Train **CatBoostClassifier** for CS → generate probability scores (`p_cs_1`).
+  * Stage 2: Feed `p_cs_1` into **LightGBM regressors** (with Tweedie loss) for LC and HALC.
+  * To avoid leakage, `p_cs_1` was generated with out-of-fold cross-validation.
+
+---
+
+### 5. Model Training & Optimization
+
+* **Cross-validation:** 3-fold CV to ensure generalizability.
+* **Hyperparameter tuning:** Performed using **Optuna** (Bayesian optimization).
+* **Interpretability:** Applied **SHAP values** to analyze feature importance and business relevance.
+
+---
+
+## 📈 Results
+
+* **Claim Status (CS):** CatBoost Classifier → **AUC ≈ 0.822**
+* **Loss Cost (LC):** LightGBM Regressor (Tweedie) → **RMSE ≈ 835.63**
+* **HALC:** LightGBM Regressor (Tweedie) → **RMSE ≈ 1659.27**
+
+**Key Predictors:**
+
+* Claim status probability (`p_cs_1`)
+* Policy tenure & years with company
+* Vehicle characteristics (age, cylinder capacity, horsepower, weight)
+
+---
+
+## 🚀 Deliverables
+
+* **Prediction file (`group_x_prediction.csv`)** containing three columns:
+
+  * `LC`
+  * `HALC`
+  * `CS`
+
+* **Project report** summarizing methodology, results, and business implications.
+
+---
+
+✅ This README now combines both the **project brief** and your **implemented methodology/results**.
+
+Do you want me to also include a **“Future Work”** section from your report (e.g., autoencoder augmentation, limitations, business insights), or should I keep it focused on the main final approach?
